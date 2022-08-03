@@ -1,5 +1,7 @@
 const btn = document.querySelector(".btn");
 const result = document.querySelector(".result");
+const id = document.querySelector(".id");
+const statusCode = document.querySelector(".status");
 const url = "https://icanhazdadjoke.com/";
 
 btn.addEventListener("click", () => {
@@ -14,7 +16,10 @@ const fetchDadJoke = async () => {
     },
   });
   const data = await response.json();
-  result.textContent = `${data.joke} ID: ${data.id}`;
+  console.log(data);
+  result.textContent = `${data.joke}`;
+  id.textContent = `Joke ID: ${data.id}`;
+  statusCode.textContent = `Request Status: ${data.status}`;
 };
 
 fetchDadJoke();
