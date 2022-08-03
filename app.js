@@ -9,17 +9,25 @@ btn.addEventListener("click", () => {
 });
 
 const fetchDadJoke = async () => {
-  const response = await fetch(url, {
-    headers: {
-      Accept: "application/json",
-      "User-Agent": "Gene is Learning",
-    },
-  });
-  const data = await response.json();
-  console.log(data);
-  result.textContent = `${data.joke}`;
-  id.textContent = `Joke ID: ${data.id}`;
-  statusCode.textContent = `Request Status: ${data.status}`;
+  result.textContent = "loading....";
+  try {
+    const response = await fetch(url, {
+      headers: {
+        Accept: "application/json",
+        "User-Agent": "Gene is Learning",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("something happened dude");
+    }
+    const data = await response.json();
+
+    result.textContent = `${data.joke}`;
+    id.textContent = `Joke ID: ${data.id}`;
+    statusCode.textContent = `Request Status: ${data.status}`;
+  } catch (err) {
+    result.textContent = "sorry there was an error my man";
+  }
 };
 
 fetchDadJoke();
